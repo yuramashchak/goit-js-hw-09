@@ -73,13 +73,11 @@ function imagesTemplate(images) {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  galleryElem.innerHTML = imagesTemplate(images);
+galleryElem.innerHTML = imagesTemplate(images);
 
-  let gallery = new SimpleLightbox('.gallery a');
-
-
-
+const gallery = new SimpleLightbox('.gallery a', {
+  captionsData: 'alt',
+  captionPosition: 'bottom',
+  captionDelay: 250,
 });
-
 
