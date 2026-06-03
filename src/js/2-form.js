@@ -19,14 +19,27 @@ const typeForm = fullForm.addEventListener('input', ()=>{
 
 document.addEventListener('DOMContentLoaded', ()=>{
     const savedData = loadFromLs(STORAGE_KEY);
-    fullForm.elements.email.value = savedData?.email;
-    fullForm.elements.message.value = savedData?.message;
+    fullForm.elements.email.value = savedData?.email || '';
+    fullForm.elements.message.value = savedData?.message || '';
+
+    formData.email = savedData?.email || '';
+    formData.message = savedData?.message || '';
 })
 
-const submitForm = fullForm.addEventListener('submit', ()=>{
-    if(formData.email === null || formData.message === null){
-
+const submitForm = fullForm.addEventListener('submit', (e)=>{
+    e.preventDefault();
+    if(formData.email.trim() === '' || formData.message.trim() === ''){
+        alert('Fill please all fields');
+        return;
     }
+
+
+    console.log(formData);
+    formData.email = '';
+    formData.message = '';
+   localStorage.removeItem(STORAGE_KEY)
+   fullForm.reset();
+
 })
 
 
